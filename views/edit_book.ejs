@@ -1,0 +1,41 @@
+<div class="admin-form-container">
+  <h2 class="mb-4 fw-bold"><i class="fa fa-edit"></i> Edit Book</h2>
+  <form class="admin-form" method="POST" action="/edit-book/<%= book.id %>" enctype="multipart/form-data">
+
+    <label for="title">Title:</label>
+    <input name="title" id="title" value="<%= book.title %>" required>
+
+    <label for="author">Author:</label>
+    <input name="author" id="author" value="<%= book.author %>" required>
+
+    <label for="section_id">Section:</label>
+    <select name="section_id" id="section_id" required>
+      <option value="">-- Select Section --</option>
+      <% sections.forEach(section => { %>
+        <option value="<%= section.id %>" <%= section.id === book.section_id ? 'selected' : '' %>>
+          <%= section.name %>
+        </option>
+      <% }); %>
+    </select>
+
+    <label>Current PDF:</label>
+    <a href="/uploads/pdfs/<%= book.pdf %>" target="_blank"><%= book.pdf %></a>
+
+    <label for="pdf">Upload New PDF (optional):</label>
+    <input type="file" name="pdf" id="pdf" accept="application/pdf">
+
+    <label>Current Thumbnail:</label>
+    <a href="/uploads/thumbnails/<%= book.thumbnail %>" target="_blank">
+      <img src="/uploads/thumbnails/<%= book.thumbnail %>" style="max-width: 150px;">
+    </a>
+
+    <label for="thumbnail">Upload New Thumbnail (optional):</label>
+    <input type="file" name="thumbnail" id="thumbnail" accept="image/*">
+
+    <button type="submit"><i class="fa fa-save"></i> Update Book</button>
+  </form>
+
+  <% if (error) { %>
+    <div class="alert alert-danger mt-3"><%= error %></div>
+  <% } %>
+</div>

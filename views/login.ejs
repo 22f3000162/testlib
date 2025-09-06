@@ -1,0 +1,322 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Noto+Sans:wght@400;700&display=swap');
+  body {
+    background: linear-gradient(135deg, #f8f7f4 0%, #f3ede4 100%);
+    min-height: 100vh;
+    font-family: 'Roboto', 'Noto Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .login-card {
+    max-width: 370px;
+    margin: 50px auto;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px 0 rgba(166, 124, 82, 0.13);
+    background: #fff;
+    transition: max-width 0.3s;
+    font-family: 'Roboto', 'Noto Sans', Arial, sans-serif;
+  }
+  .login-header {
+    background: linear-gradient(90deg, #e1b382, #a67c52);
+    border-radius: 1.5rem 1.5rem 0 0;
+    padding: 2rem 1.5rem 1rem 1.5rem;
+    color: #fff;
+    text-align: center;
+    position: relative;
+  }
+  .login-header i {
+    font-size: 2.3rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  .login-header h2 {
+    font-family: 'Noto Sans', 'Roboto', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+  .login-header p {
+    font-size: 1rem;
+    opacity: 0.93;
+    font-weight: 500;
+  }
+  .form-label {
+    font-weight: 500;
+    color: #a67c52;
+    margin-bottom: 0.2em;
+    font-family: 'Roboto', 'Noto Sans', Arial, sans-serif;
+  }
+  .form-control {
+    border-radius: 7px;
+    border: 1.5px solid #ececec;
+    padding: 0.6em 1em;
+    font-size: 1em;
+    background: #faf9f6;
+    transition: border 0.2s;
+    margin-bottom: 0.7em;
+  }
+  .form-control:focus {
+    border-color: #a67c52;
+    box-shadow: 0 0 0 0.18rem rgba(225, 179, 130, 0.15);
+  }
+  .login-btn {
+    background: linear-gradient(90deg, #e1b382, #a67c52);
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+    transition: background 0.3s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(166, 124, 82, 0.09);
+  }
+  .login-btn:hover {
+    background: linear-gradient(90deg, #a67c52, #e1b382);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(166, 124, 82, 0.15);
+  }
+  .login-card a {
+    color: #a67c52;
+    text-decoration: underline;
+    font-size: 0.97em;
+  }
+  .login-card a:hover {
+    color: #e1b382;
+    text-decoration: underline;
+  }
+  .alert-danger {
+    background: #ffe9e0;
+    color: #a94442;
+    border: none;
+    border-radius: 6px;
+    padding: 0.7em 1em;
+    font-size: 1em;
+    margin-top: 1em;
+  }
+  @media (max-width: 575.98px) {
+    .login-card {
+      max-width: 97vw;
+      margin: 20px auto;
+      border-radius: 1rem;
+    }
+    .login-header {
+      padding: 1.2rem 0.8rem 0.8rem 0.8rem;
+      border-radius: 1rem 1rem 0 0;
+    }
+    .login-header h2 {
+      font-size: 1.3rem;
+    }
+    .login-header i {
+      font-size: 1.3rem;
+    }
+    .p-4 {
+      padding: 1.2rem !important;
+    }
+    .form-label {
+      font-size: 0.95rem;
+    }
+    .login-btn {
+      font-size: 1rem;
+      padding: 0.6rem 0;
+    }
+  }
+  @media (max-width: 350px) {
+    .login-card {
+      max-width: 100vw;
+      margin: 5px;
+      border-radius: 0.5rem;
+    }
+  }
+</style>
+
+<div class="login-card shadow">
+  <div class="login-header">
+    <i class="fa-solid fa-right-to-bracket"></i>
+    <h2 class="mb-0">Welcome Back!</h2>
+    <p class="mb-0">Sign in to your account</p>
+  </div>
+  <form method="POST" action="/login" class="p-4">
+    <div class="mb-3">
+      <label class="form-label" for="username">
+        <i class="fa-solid fa-user"></i> Username
+      </label>
+      <input id="username" name="username" class="form-control" placeholder="Enter your username" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="password">
+        <i class="fa-solid fa-lock"></i> Password
+      </label>
+      <input id="password" name="password" type="password" class="form-control" placeholder="Enter your password" required>
+    </div>
+    <button type="submit" class="btn login-btn w-100 py-2 mt-2">
+      <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+    </button>
+    <div class="mt-3 text-center">
+      <a href="/register">Don't have an account? Register</a>
+      <br>
+      <a href="/forgot-password" class="text-decoration-underline">Forgot password?</a>
+    </div>
+    <% if (error) { %>
+      <div class="alert alert-danger mt-3 mb-0 py-2 px-3" role="alert">
+        <i class="fa-solid fa-triangle-exclamation"></i> <%= error %>
+      </div>
+    <% } %>
+
+  </form>
+</div>
+
+
+
+
+
+<!-- <style>
+  body {
+    background: linear-gradient(135deg, #f8fafc 0%, #dbeafe 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .login-card {
+    max-width: 370px;
+    margin: 50px auto;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    background: #fff;
+    transition: max-width 0.3s;
+  }
+  .login-header {
+    background: linear-gradient(90deg, #3b82f6, #6366f1);
+    border-radius: 1.5rem 1.5rem 0 0;
+    padding: 2rem 1.5rem 1rem 1.5rem;
+    color: #fff;
+    text-align: center;
+    position: relative;
+  }
+  .login-header i {
+    font-size: 2.3rem;
+    margin-bottom: 0.5rem;
+  }
+  .form-control:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.15);
+  }
+  .login-btn {
+    background: linear-gradient(90deg, #3b82f6, #6366f1);
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  .login-btn:hover {
+    background: linear-gradient(90deg, #6366f1, #3b82f6);
+  }
+  @media (max-width: 575.98px) {
+    .login-card {
+      max-width: 95vw;
+      margin: 20px auto;
+      border-radius: 1rem;
+    }
+    .login-header {
+      padding: 1.2rem 0.8rem 0.8rem 0.8rem;
+      border-radius: 1rem 1rem 0 0;
+    }
+    .login-header h2 {
+      font-size: 1.3rem;
+    }
+    .login-header i {
+      font-size: 1.3rem;
+    }
+    .p-4 {
+      padding: 1.2rem !important;
+    }
+    .form-label {
+      font-size: 0.95rem;
+    }
+    .login-btn {
+      font-size: 1rem;
+      padding: 0.6rem 0;
+    }
+  }
+  @media (max-width: 350px) {
+    .login-card {
+      max-width: 100vw;
+      margin: 5px;
+      border-radius: 0.5rem;
+    }
+  }
+</style>
+
+<div class="login-card shadow">
+  <div class="login-header">
+    <i class="fa-solid fa-right-to-bracket"></i>
+    <h2 class="mb-0">Welcome Back!</h2>
+    <p class="mb-0" style="font-size: 1rem; opacity: 0.9;">Sign in to your account</p>
+  </div>
+  <form method="POST" action="/login" class="p-4">
+    <div class="mb-3">
+      <label class="form-label" for="username">
+        <i class="fa-solid fa-user"></i> Username
+      </label>
+      <input id="username" name="username" class="form-control" placeholder="Enter your username" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="password">
+        <i class="fa-solid fa-lock"></i> Password
+      </label>
+      <input id="password" name="password" type="password" class="form-control" placeholder="Enter your password" required>
+    </div>
+    <button type="submit" class="btn login-btn w-100 py-2 mt-2">
+      <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+    </button>
+    <div class="mt-3 text-center">
+      <a href="/register">Don't have an account? Register</a>
+    </div>
+    <% if (error) { %>
+      <div class="alert alert-danger mt-3 mb-0 py-2 px-3" role="alert">
+        <i class="fa-solid fa-triangle-exclamation"></i> <%= error %>
+      </div>
+    <% } %>
+  </form>
+</div>
+ -->
+
+
+
+
+
+
+<!-- <div class="container d-flex align-items-center justify-content-center min-vh-100">
+  <div class="card shadow" style="width: 350px;">
+    <div class="card-body">
+      <h3 class="card-title mb-4 text-center">Login</h3>
+      <% if (error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+      <form method="POST" action="/login">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" name="username" id="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" id="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+      </form>
+      <div class="mt-3 text-center">
+        <a href="/register">Don't have an account? Register</a>
+      </div>
+    </div>
+  </div>
+</div>
+ -->
+
+
+<!-- <h2>Login</h2>
+<form method="POST" action="/login">
+  <input name="username" placeholder="Username" required>
+  <input name="password" type="password" placeholder="Password" required>
+  <button type="submit">Login</button>
+</form>
+<% if (error) { %><p style="color:red;"><%= error %></p><% } %> -->

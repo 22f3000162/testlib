@@ -1,0 +1,24 @@
+<h2><%= book.title %> by <%= book.author %></h2>
+
+<div style="text-align: center; margin-bottom: 20px;">
+  <a 
+    href="/uploads/pdfs/<%= book.pdf %>" 
+    target="_blank" 
+    style="font-size: 18px; color: blue; text-decoration: underline;"
+  >
+    📄 View this book in full screen
+  </a>
+</div>
+
+<!-- Optional: Keep iframe for inline viewing -->
+<iframe 
+  src="/uploads/pdfs/<%= book.pdf %>#toolbar=1" 
+  width="100%" height="800px"
+  style="border: none;"
+></iframe>
+
+<!-- <p style="text-align:center;color:gray;">Right-click and download is disabled on this page.</p> -->
+<script>
+  // Disable right-click
+  document.addEventListener('contextmenu', event => event.preventDefault());
+</script>

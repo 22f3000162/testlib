@@ -1,0 +1,17 @@
+<div class="admin-form-container">
+  <h2 class="mb-4 fw-bold"><i class="fa fa-folder-plus"></i> Add Section</h2>
+  <form class="admin-form" method="POST" action="/add-section">
+    
+    <label for="name">Section Name:</label>
+    <input name="name" id="name" placeholder="Enter section name" required>
+
+    <label for="description">Description (optional):</label>
+    <textarea name="description" id="description" rows="3" placeholder="Enter section description"></textarea>
+
+    <button type="submit"><i class="fa fa-plus"></i> Add Section</button>
+  </form>
+
+  <% if (error) { %>
+    <div class="alert alert-danger mt-3"><%= error %></div>
+  <% } %>
+</div>

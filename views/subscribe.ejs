@@ -1,0 +1,67 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Choose a Subscription Plan</h2>
+
+  <% if (query.limit_exceeded) { %>
+    <div class="alert alert-warning">
+      <strong>Limit reached!</strong> You've hit your monthly reading limit.
+      Upgrade to a paid plan to continue reading books.
+    </div>
+  <% } %>
+
+  <div class="mb-3">
+    <p><strong>Your current plan:</strong> <%= plan %></p>
+    <p><strong>Books read this month:</strong> <%= booksRead %></p>
+    <p><strong>Remaining reads:</strong> <%= remaining === Infinity ? 'Unlimited' : remaining %></p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card mb-4 border-secondary">
+        <div class="card-header bg-secondary text-white text-center">Free Tier</div>
+        <div class="card-body text-center">
+          <p>5 books/month</p>
+          <p class="text-muted">No payment needed</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card mb-4 border-success">
+        <div class="card-header bg-success text-white text-center">Basic</div>
+        <div class="card-body text-center">
+          <p>50 books/month</p>
+          <p>Rs 499/month</p>
+          <form action="/create-checkout-session" method="POST">
+            <input type="hidden" name="plan" value="basic">
+            <button type="submit" class="btn btn-success">Buy Basic</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card mb-4 border-primary">
+        <div class="card-header bg-primary text-white text-center">Pro</div>
+        <div class="card-body text-center">
+          <p>200 books/month</p>
+          <p>Rs 999/month</p>
+          <form action="/create-checkout-session" method="POST">
+            <input type="hidden" name="plan" value="pro">
+            <button type="submit" class="btn btn-primary">Buy Pro</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card mb-4 border-warning">
+        <div class="card-header bg-warning text-white text-center">Mega</div>
+        <div class="card-body text-center">
+          <p>Unlimited books</p>
+          <p>Rs 1499/month</p>
+          <form action="/create-checkout-session" method="POST">
+            <input type="hidden" name="plan" value="mega">
+            <button type="submit" class="btn btn-warning">Buy Mega</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

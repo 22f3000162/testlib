@@ -1,0 +1,17 @@
+<div class="profile-form-container">
+  <h2 class="mb-4 fw-bold"><i class="fa fa-user"></i> Profile</h2>
+  <form class="profile-form" method="POST" action="/profile">
+    <label>Username (cannot change): <b><%= user.username %></b></label>
+    <label for="name">Name:</label>
+    <input name="name" id="name" value="<%= user.name || '' %>" required>
+    <label for="email">Email:</label>
+    <input name="email" id="email" type="email" value="<%= user.email || '' %>" required>
+    <button type="submit"><i class="fa fa-save"></i> Update Profile</button>
+  </form>
+  <% if (success) { %>
+    <div class="alert alert-success mt-3"><%= success %></div>
+  <% } %>
+  <% if (error) { %>
+    <div class="alert alert-danger mt-3"><%= error %></div>
+  <% } %>
+</div>

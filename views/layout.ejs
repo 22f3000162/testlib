@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digital Library</title>
+
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-3">
+    <div class="container-fluid">
+      <% if (user) { %>
+        <% if (user.role === 'user') { %>
+      <a class="navbar-brand fw-bold" href="/dashboard">
+        <i class="fa-solid fa-book-open-reader me-2"></i>Digital Library
+      </a>
+        <% } else if ( user.role === 'admin') { %> 
+          <a class="navbar-brand fw-bold" href="/admin">
+        <i class="fa-solid fa-book-open-reader me-2"></i>Digital Library
+      </a>
+      <% } %>
+      <% } else { %>
+            <a class="navbar-brand fw-bold" href="/">
+        <i class="fa-solid fa-book-open-reader me-2"></i>Digital Library
+      </a>
+        <% } %>
+        
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <% if (!user) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register"><i class="fa-solid fa-user-plus"></i> Register</a>
+            </li>
+          <% } else { %>
+            <% if (user.role === 'user') { %>
+              <li class="nav-item">
+                <a class="nav-link" href="/dashboard"><i class="fa-solid fa-table-columns"></i> Dashboard</a>
+              </li>
+              <% if (!user.is_subscribed) { %>
+                <li class="nav-item">
+                  <a class="nav-link text-warning fw-bold" href="/subscribe">
+                    <i class="fa-solid fa-crown"></i> Subscribe
+                  </a>
+                </li>
+              <li class="nav-item">
+  <% 
+    const planLimits = { free: 5, basic: 50, pro: 200 };
+    const userPlan = user.subscription_plan || 'free';
+    const booksRead = user.monthly_books_read || 0;
+    const remainingReads = planLimits[userPlan] ? Math.max(0, planLimits[userPlan] - booksRead) : 'Unlimited';
+
+    const planDisplay = {
+      free: {
+        label: `Free reads left: ${remainingReads}`,
+        icon: 'fa-book-open',
+        color: 'text-secondary'
+      },
+      basic: {
+        label: `Basic plan: ${remainingReads} left`,
+        icon: 'fa-book',
+        color: 'text-success'
+      },
+      pro: {
+        label: `Pro plan: ${remainingReads} left`,
+        icon: 'fa-book-reader',
+        color: 'text-primary'
+      },
+      mega: {
+        label: `Mega plan: Unlimited reads`,
+        icon: 'fa-infinity',
+        color: 'text-warning'
+      }
+    };
+  %>
+  <span class="nav-link disabled <%= planDisplay[userPlan].color %>">
+    <i class="fa-solid <%= planDisplay[userPlan].icon %>"></i>
+    <%= planDisplay[userPlan].label %>
+  </span>
+</li>
+
+
+
+
+              <% } else { %>
+                <li class="nav-item">
+                  <span class="nav-link text-success">
+                    <i class="fa-solid fa-crown"></i> Subscribed
+                  </span>
+                </li>
+              <% } %>
+            <% } %>
+            <% if (user.role === 'admin') { %>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin"><i class="fa-solid fa-screwdriver-wrench"></i> Admin Panel</a>
+              </li>
+            <% } %>
+             <% if (user.role === 'user') { %>
+              <li class="nav-item">
+                <a class="nav-link" href="/history"><i class="fa-solid fa-clock-rotate-left"></i> Book History</a>
+              </li>
+            <% } %>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile"><i class="fa-solid fa-user"></i> Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </li>
+          <% } %>
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
+  
+  <%- body %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

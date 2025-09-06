@@ -1,0 +1,66 @@
+<style>._failed {
+  border-bottom: solid 4px red !important;
+}
+._failed i {
+  color: red !important;
+}
+
+._success {
+  box-shadow: 0 15px 25px #00000019;
+  padding: 45px;
+  width: 100%;
+  text-align: center;
+  margin: 40px auto;
+  border-bottom: solid 4px #28a745;
+}
+
+._success i {
+  font-size: 55px;
+  color: #28a745;
+}
+
+._success h2 {
+  margin-bottom: 12px;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-top: 10px;
+}
+
+._success p {
+  margin-bottom: 0px;
+  font-size: 18px;
+  color: #495057;
+  font-weight: 500;
+}
+</style>
+
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-md-5">
+          <div class="message-box _success">
+               <i class="fa fa-check-circle" aria-hidden="true"></i>
+              <h2> Your payment was successful </h2>
+             <!-- <p> Thank you for downloading. </p>       -->
+      </div> 
+      <p id="redirect-msg">
+        Redirecting to dashboard in <span id="countdown">30</span> seconds.
+        <a id="dashboard-link" href="/dashboard">Click here to go to dashboard</a>
+      </p>
+  </div> 
+  
+</div> 
+
+<script>
+
+  var seconds = 60;
+  var countdownSpan = document.getElementById("countdown");
+  var dashboardTimer = setInterval(function() {
+    seconds--;
+    countdownSpan.textContent = seconds;
+    if (seconds <= 0) {
+      clearInterval(dashboardTimer);
+      window.location.href = "/dashboard";
+    }
+  }, 1000);
+</script>

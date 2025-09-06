@@ -1,0 +1,41 @@
+<div class="user-dashboard-container">
+  <% if (user.is_subscribed) { %>
+    <div class="subscription-status mb-4">
+      <div class="alert alert-success">
+        <i class="fas fa-crown"></i> Subscribed until 
+        <%= new Date(user.subscription_end).toLocaleDateString() %>
+      </div>
+    </div>
+  <% } %>
+
+  <% sections.forEach(section => { %>
+    <% if (section.books.length) { %>
+    <div class="section-block mb-5">
+      <h3 class="section-title"><%= section.name %></h3>
+      <% if (section.description) { %>
+        <p class="section-description"><%= section.description %></p>
+      <% } %>
+      <div class="books-grid">
+        <% if (section.books.length === 0) { %>
+          <p class="text-muted">No books in this section yet.</p>
+        <% } else { %>
+          <% section.books.forEach(book => { %>
+            <div class="book-card">
+              <img src="/uploads/thumbnails/<%= book.thumbnail %>" 
+                   class="book-thumbnail" 
+                   alt="<%= book.title %> cover">
+              <div class="book-body">
+                <h5 class="book-title"><%= book.title %></h5>
+                <p class="book-author"><%= book.author %></p>
+                <a href="/read/<%= book.id %>" class="btn btn-read">
+                  <i class="fas fa-book-open"></i> Read Now
+                </a>
+              </div>
+            </div>
+          <% }); %>
+        <% } %>
+      </div>
+    </div>
+    <% } %>
+  <% }); %>
+</div>

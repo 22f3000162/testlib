@@ -1,0 +1,57 @@
+<style>
+    .card-body{
+        font-size: 1.5rem;
+    }
+</style>
+
+<div class="container my-4">
+  <div class="card shadow" style="border-radius: 1.5rem;">
+    <div class="card-header" style="background: linear-gradient(90deg, #e1b382, #a67c52); border-radius: 1.5rem 1.5rem 0 0;">
+      <h2 class="mb-0 text-white">
+        <i class="fa-solid fa-clock-rotate-left me-2"></i> Your Reading History
+      </h2>
+    </div>
+    <div class="card-body p-4">
+      <% if (!history || history.length === 0) { %>
+        <div class="alert alert-warning mb-0">
+          <i class="fa-solid fa-circle-info"></i> No books read yet.
+        </div>
+      <% } else { %>
+        <div class="table-responsive">
+          <table class="table align-middle" style="border-radius: 1rem; overflow: hidden;">
+            <thead style="background: #e1b382;">
+              <tr>
+                <!-- <th>Thumbnail</th> -->
+                <th>Date Time</th>
+                <th>Title</th>
+                <th>Author</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% history.forEach(book => { %>
+                <tr>
+                  <!-- <td>
+                    <% if (book.thumbnail) { %>
+                      <img src="<%= book.thumbnail %>" alt="Thumbnail" width="50" style="border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,0.09);">
+                    <% } else { %>
+                      <span class="text-muted">No Image</span>
+                    <% } %>
+                  </td> -->
+                  <td>
+                    <span class="badge" style="background: #e1b382; color: #7d5a36;">
+                      <i class="fa-regular fa-calendar-check"></i>
+                      <%= new Date(book.read_at + 'Z').toLocaleString() %>
+                    </span>
+                  </td>
+                  <td class="fw-semibold" style="color: #a67c52;"><%= book.title %></td>
+                  <td style="color: #7d5a36;"><%= book.author %></td>
+                  
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>

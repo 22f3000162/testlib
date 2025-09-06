@@ -1,0 +1,31 @@
+<div class="admin-form-container">
+  <h2 class="mb-4 fw-bold"><i class="fa fa-plus"></i> Add Book</h2>
+  <form class="admin-form" method="POST" action="/add-book" enctype="multipart/form-data">
+    
+    <label for="title">Title:</label>
+    <input name="title" id="title" placeholder="Title" required>
+    
+    <label for="author">Author:</label>
+    <input name="author" id="author" placeholder="Author" required>
+    
+    <label for="section_id">Section:</label>
+    <select name="section_id" id="section_id" required>
+      <option value="">-- Select Section --</option>
+      <% sections.forEach(section => { %>
+        <option value="<%= section.id %>"><%= section.name %></option>
+      <% }); %>
+    </select>
+
+    <label for="pdf">PDF File:</label>
+    <input type="file" name="pdf" id="pdf" accept="application/pdf" required>
+    
+    <label for="thumbnail">Thumbnail:</label>
+    <input type="file" name="thumbnail" id="thumbnail" accept="image/*" required>
+    
+    <button type="submit"><i class="fa fa-plus"></i> Add</button>
+  </form>
+
+  <% if (error) { %>
+    <div class="alert alert-danger mt-3"><%= error %></div>
+  <% } %>
+</div>

@@ -1,0 +1,28 @@
+<div class="user-dashboard-container">
+  <% sections.forEach(section => { %>
+    <% if (section.books && section.books.length > 0) { %>
+      <div class="section-block mb-5">
+        <h3 class="section-title"><%= section.name %></h3>
+        <% if (section.description) { %>
+          <p class="section-description"><%= section.description %></p>
+        <% } %>
+        <div class="books-grid">
+          <% section.books.forEach(book => { %>
+            <div class="book-card">
+              <img src="/uploads/thumbnails/<%= book.thumbnail %>" 
+                   class="book-thumbnail" 
+                   alt="<%= book.title %> cover">
+              <div class="book-body">
+                <h5 class="book-title"><%= book.title %></h5>
+                <p class="book-author"><%= book.author %></p>
+                <a href="/login" class="btn btn-warning">
+                  <i class="fas fa-lock"></i> Login to Read
+                </a>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    <% } %>
+  <% }); %>
+</div>

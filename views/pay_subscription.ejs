@@ -1,0 +1,52 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow">
+        <div class="card-body">
+          <h4 class="card-title mb-4 text-center">Subscribe to <%= planName %> Plan</h4>
+          <form id="subscription-form" method="POST" action="/process-subscription">
+            <input type="hidden" name="plan" value="<%= plan %>">
+
+            <div class="mb-3">
+              <label for="cardholder-name" class="form-label">Name on Card</label>
+              <input type="text" class="form-control" id="cardholder-name" name="cardholder-name" placeholder="Full Name" required>
+              <span class="helper-text"></span>
+            </div>
+
+            <!-- Simulated Credit Card Info (BlueSnap fields) -->
+            <div class="mb-3">
+              <label for="card-number" class="form-label">Card Number</label>
+              <div class="input-group">
+                <div class="form-control" id="card-number" data-bluesnap="ccn"></div>
+                <span class="input-group-text bg-white border-start-0" id="card-logo">
+                  <img src="https://files.readme.io/d1a25b4-generic-card.png" height="20px" alt="Card Logo">
+                </span>
+              </div>
+              <span class="helper-text" id="ccn-help"></span>
+            </div>
+
+            <div class="row">
+              <!-- Expiry Date -->
+              <div class="col-7 mb-3">
+                <label for="exp-date" class="form-label">Exp. Date</label>
+                <div class="form-control" id="exp-date" data-bluesnap="exp"></div>
+                <span class="helper-text" id="exp-help"></span>
+              </div>
+
+              <!-- CVV -->
+              <div class="col-5 mb-3">
+                <label for="cvv" class="form-label">Security Code</label>
+                <div class="form-control" id="cvv" data-bluesnap="cvv"></div>
+                <span class="helper-text" id="cvv-help"></span>
+              </div>
+            </div>
+
+            <button class="btn btn-success w-100 mt-3" type="submit" id="submit-button">
+              Pay Now Rs.<%= price %>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="admin-dashboard-container">
+  <h2 class="mb-2 fw-bold"><i class="fa fa-cogs"></i> Admin Panel</h2>
+  <p class="mb-4">Welcome, <strong><%= user.username %></strong>! (Role: <%= user.role %>)</p>
+
+  <h3 class="section-title">Manage Books</h3>
+  <a href="/add-book" class="btn btn-add mb-3"><i class="fa fa-plus"></i> Add New Book</a>
+  <a href="/add-section" class="btn btn-add mb-3"><i class="fa fa-plus"></i> Add New Section</a>
+  <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Thumbnail</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Section</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% books.forEach(book => { %>
+          <tr>
+            <td>
+              <img src="/uploads/thumbnails/<%= book.thumbnail %>" alt="Thumbnail" width="50">
+            </td>
+            <td><%= book.title %></td>
+            <td><%= book.author %></td>
+            <td><%= book.section_name %></td>
+            <td>
+              <div class="admin-actions">
+                <a href="/edit-book/<%= book.id %>" class="btn btn-edit btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                <form method="POST" action="/delete-book" style="display:inline;">
+                  <input type="hidden" name="id" value="<%= book.id %>">
+                  <button type="submit" class="btn btn-delete btn-sm"><i class="fa fa-trash"></i> Delete</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+  <h3 class="section-title mt-5">Manage Users</h3>
+  <ul class="list-group list-group-flush">
+    <% users.forEach(u => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><i class="fa fa-user"></i> <%= u.username %></span>
+        <span class="badge bg-secondary"><%= u.role %></span>
+      </li>
+    <% }) %>
+  </ul>
+</div>
